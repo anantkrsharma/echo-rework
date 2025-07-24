@@ -133,4 +133,3 @@ MCP makes it trivial for **AI assistants, bots, or other systems** to:
 
 **Empower anyone to launch & grow their personal brand with zero friction.**
 **One API, one link, your brand — no code required.**
-
