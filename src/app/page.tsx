@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import axios from "axios";
+
 
 const featureItems = [
   { icon: BookOpen, title: "Custom CMS", desc: "Manage posts, videos, and courses from one dashboard." },
@@ -32,7 +34,6 @@ const apiTools = [
   { name: "get_site_status", desc: "Monitor site health & metrics." },
 ];
 
-const audienceList = ["Content creators", "Solo founders", "Coaches & consultants", "Indie builders"];
 
 function Section({ title, children }: { title?: string; children: React.ReactNode }) {
   return (
@@ -47,18 +48,28 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!/\S+@\S+\.\S+/.test(email)) {
       toast.error("Enter a valid email.");
       return;
     }
     setLoading(true);
-    setTimeout(() => {
-      toast.success("Joined waitlist!");
-      setEmail("");
-      setLoading(false);
-    }, 700);
+    try {
+      const res = await axios.post("/api/email", { email });
+      const data = res.data;
+      if (data.exists) {
+        toast.info("Email already registered.");
+      } else if (data.added) {
+        toast.success("Joined waitlist!");
+        setEmail("");
+      } else {
+        toast.error("Something went wrong.");
+      }
+    } catch {
+      toast.error("Network error.");
+    }
+    setLoading(false);
   };
 
   return (
