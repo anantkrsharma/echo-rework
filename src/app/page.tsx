@@ -15,27 +15,28 @@ import {
   Server,
   Layers,
   Database,
+  LucideIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 import Image from "next/image";
 import axios from "axios";
-import { motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface Feature {
-  icon: any;
+  icon: LucideIcon;
   title: string;
   desc: string;
 }
 interface Step {
-  icon: any;
+  icon: LucideIcon;
   text: string;
 }
 interface ApiTool {
-  icon: any;
+  icon: LucideIcon;
   name: string;
   desc: string;
 }
@@ -78,12 +79,10 @@ const containerVariants = {
     },
   },
 };
-
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
 };
-
 function Section({ title, children }: { title?: string; children: React.ReactNode }) {
   return (
     <section className="py-24">
