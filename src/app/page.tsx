@@ -155,9 +155,6 @@ export default function Home() {
       <header className="border-b border-neutral-800">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <Image src="/logo.png" width={100} height={100} alt="Logo" />
-          <Button variant="outline" className="border-neutral-700 text-black hover:bg-neutral-800">
-            Join Waitlist
-          </Button>
         </div>
       </header>
 
